@@ -1,39 +1,27 @@
 package gui;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.Window;
 
-import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
+import com.alee.laf.rootpane.WebFrame;
+
 @SuppressWarnings("serial")
-public class MainFrame extends JFrame{
-	
-	private static MainFrame instance;
+public abstract class StandaloneWindow extends WebFrame{
 	/**
-	 * 获得主窗口单例实例
-	 * @return 主窗口单例
+	 * 构造方法
 	 */
-	public static MainFrame getInstance() {
-		if(instance == null) {
-			instance = new MainFrame();
-		}
-		return instance;
-	}
-	
-	/**
-	 * 主窗口的构造方法
-	 */
-	private MainFrame() {
-		//设置窗口标题
-		setTitle("Test");
+	protected StandaloneWindow() {
 		//EXIT_ON_CLOSE
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		//默认窗口尺寸
-		setSize(400, 600);
+		setSize(getInitailSize());
 		setMinimumSize(getSize());
 		
 		//居中显示窗口
@@ -43,6 +31,17 @@ public class MainFrame extends JFrame{
 		
 		//可以获取焦点
 		setFocusable(true);
+		
+		//默认采用BorderLayout
+		setLayout(new BorderLayout());
+	}
+	
+	/**
+	 * 获取初始化窗口尺寸
+	 * @return 初始化窗口尺寸
+	 */
+	protected Dimension getInitailSize() {
+		return new Dimension(600, 400);
 	}
 	
 	/**
